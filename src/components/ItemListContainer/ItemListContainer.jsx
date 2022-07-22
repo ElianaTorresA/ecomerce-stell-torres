@@ -1,9 +1,9 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { Link, useImperativeHandle } from 'react-router-dom'
 import ItemCount from "./ItemCount"
 import ItemList from "./ItemList"
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = () => {
 
   const onAdd = (count) => {
     alert('Compraste:' + count)
@@ -33,6 +33,7 @@ const ItemListContainer = ({ greeting }) => {
   return (
     <div style={{ textAlign: "center", marginTop: 100}}>
       <ItemCount initial={1} stock={10} onAdd={onAdd} />
+      <br/>
       <ItemList items={items} />
     </div>
   )

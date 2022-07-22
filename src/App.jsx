@@ -5,6 +5,8 @@ import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import ItemDeteailContainer from './components/ItemDetailContainer/ItemDetailContainer';
+import { Suspense } from 'react';
 
 //import { lazy, Suspense } from 'react';
 
@@ -17,8 +19,13 @@ function App() {
           <NavBar />
           <Routes>
             <Route index path='/' element={<ItemListContainer />} />
-            <Route path='/detalle' element={<ItemDetailContainer />}/>
+            <Route path='/detalle/:productoId' element={
+              <Suspense fallback={<div>Cargando...</div>}>
+                <ItemDetailContainer/>
+              </Suspense>
+            }/>
           </Routes>
+          <ItemDeteailContainer/>
         </div>
     </BrowserRouter>
   );
