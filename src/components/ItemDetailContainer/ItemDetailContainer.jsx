@@ -1,46 +1,25 @@
-import React from "react";
+import { useEffect } from "react"
+import { useParams } from "react-router-dom"
 
-import ItemDetail from "./ItemDetail";
+import ItemDetail from "./ItemDetail"
+import { getFetch } from "react"
+import { useState } from "react"
 
-const getItems = new Promise((res, rej) => {
-  setTimeout(() => {
-    res([
-      {
-        id: 1,
-        title: "Producto 1",
-        pictureUrl: "https://i.linio.com/p/a815de1c590bfc12db4929f315e4f1ac-product.webp",
-        description:
-          "Camisa Hombre",
-        price: "$500"
-      }
-    ]);
-  }, 2000);
-});
 
-const ItemDeteailContainer = () => {
-  const [itemDetailResq, setItemDetailResq] = React.useState();
+const ItemDetailConteiner = () => {
+    const [ producto, setProducto ] =  useState({})
+    const { productId } = useParams()
 
-  React.useEffect(() => {
-    getItems.then((res) => {
-      setItemDetailResq(res[0]);
-    });
-  }, []);
-  console.log(itemDetailResq);
-  return (
-    <>
-      {itemDetailResq === undefined ? (
-        <p>loading</p>
-      ) : (
-        <ItemDetail
-          id={itemDetailResq.id}
-          title={itemDetailResq.title}
-          pictureUrl={itemDetailResq.pictureUrl}
-          description={itemDetailResq.description}
-          price={itemDetailResq.price}
-        />
-      )}
-    </>
-  );
-};
+    useEffect( ()=> {
+        getFetch(productId)
+        .then( data => setProducto(data) )
+    }, [productId])
+    
+    return ( 
+        <div>            
+            <ItemDetail producto={producto} />            
+        </div>
+    )
+}
 
-export default ItemDeteailContainer
+export default ItemDetailConteiner
