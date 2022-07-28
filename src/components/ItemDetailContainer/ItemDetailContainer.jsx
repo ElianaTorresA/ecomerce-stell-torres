@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 import ItemDetail from "./ItemDetail"
-import { getFetch } from "react"
+import { getFetch } from "../../helpers/getFech"
 import { useState } from "react"
 
 

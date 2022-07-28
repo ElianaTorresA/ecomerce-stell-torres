@@ -17,7 +17,6 @@ const Item = ({item}) => {
                 <Button variant="primary">Ver detalle</Button>
             </Card.Body>
         </Card>
-        
     </div>
     )
 }

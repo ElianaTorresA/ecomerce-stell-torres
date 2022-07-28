@@ -32,8 +32,6 @@ const ItemListContainer = () => {
 
   return (
     <div style={{ textAlign: "center", marginTop: 100}}>
-      <ItemCount initial={1} stock={10} onAdd={onAdd} />
-      <br/>
       <ItemList items={items} />
     </div>
   )
