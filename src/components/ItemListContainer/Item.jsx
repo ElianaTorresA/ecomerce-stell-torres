@@ -1,5 +1,7 @@
+import { prettyDOM } from '@testing-library/react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 const Item = ({item}) => {
     const {name, price, stock, image} = item
@@ -14,7 +16,10 @@ const Item = ({item}) => {
                     <br />
                     Stock: {stock}
                 </Card.Text>
-                <Button variant="primary">Ver detalle</Button>
+                    <Link to={'/detalle ${item.id}'}>
+                        <Button variant="primary">Ver detalle</Button>
+                    </Link>
+                
             </Card.Body>
         </Card>
     </div>
