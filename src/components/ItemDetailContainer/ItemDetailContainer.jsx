@@ -1,25 +1,40 @@
-import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import ItemDetail from "../ItemDetail/ItemDetail"
+import Loading from "../Loading/Loading"
 
-import ItemDetail from "./ItemDetail"
-import { getFetch } from "../../helpers/getFech"
-import { useState } from "react"
+const ItemDetailContainer = ({ product, onAdd }) => {
+    const [article, setArticle] = useState()
+    const [loading, setLoading] = useState(true)
 
+    const getProduct = () => {
+        return new Promise((res, rej) => {
+            setTimeout(() => {
+                res(product)
+            }, 1000)
+        })
+    }
 
-const ItemDetailConteiner = () => {
-    const [ producto, setProducto ] =  useState({})
-    const { productId } = useParams()
+    useEffect(() => {
+        let isSubscribed = true
+        getProduct()
+            .then((data) => {
+                if (isSubscribed) {
+                    setArticle(data)
+                    setLoading(false)
+                }
+            })
+            .catch(() => console.log("rejected"))
 
-    useEffect( ()=> {
-        getFetch(productId)
-        .then( data => setProducto(data) )
-    }, [productId])
-    
-    return ( 
-        <div>            
-            <ItemDetail producto={producto} />            
+        return () => (isSubscribed = false)
+    }, [])
+
+    return loading ? (
+        <Loading text="Cargando..." />
+    ) : (
+        <div>
+            <ItemDetail product={article} onAdd={onAdd} />
         </div>
     )
 }
 
-export default ItemDetailConteiner
+export default ItemDetailContainer

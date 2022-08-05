@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useImperativeHandle } from 'react-router-dom'
-import ItemCount from "./ItemCount"
-import ItemList from "./ItemList"
+import ItemCount from "../ItemCount/ItemCount"
+import ItemList from "../ItemList/ItemList"
 
 const ItemListContainer = () => {
 
